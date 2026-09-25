@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TrackLane — a concept shipment-visibility platform. Industrial spec-sheet design study with sample routes, sample events, and honest labels.">
+  <meta name="theme-color" content="#141619">
+  <title>TrackLane — Every shipment, on the record</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a href="#" class="mark" aria-label="TrackLane home">
+        <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 20h20M6 20V8l7-4 7 4v12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="13" cy="12" r="2.6" fill="#ff5c00"/></svg>
+        <span>TRACKLANE</span>
+      </a>
+      <nav class="topbar__nav" aria-label="Primary">
+        <a href="#network">Network</a>
+        <a href="#tracker">Tracker</a>
+        <a href="#specs">Specs</a>
+        <a href="#pricing">Rates</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="btn btn--orange" href="#tracker">Open sample shipment</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ======== HERO ======== -->
+    <section class="hero">
+      <div class="hero__inner">
+        <div class="hero__left">
+          <p class="plate">CONCEPT&nbsp;BUILD — SAMPLE&nbsp;DATA</p>
+          <h1>EVERY SHIPMENT,<br><span class="h1-hi">ON THE RECORD.</span></h1>
+          <p class="hero__sub">TrackLane is a design concept for shipment visibility: one timeline per consignment, drawn from carrier events, readable by a dispatcher at 2 a.m. without a translation layer. The route, the events, and the vessel names below are invented for the study.</p>
+          <div class="hero__actions">
+            <a href="#network" class="btn btn--orange btn--big">See the route model</a>
+            <a href="#specs" class="btn btn--wire btn--big">Read the spec sheet</a>
+          </div>
+          <dl class="hero__kv">
+            <div><dt>MODELS</dt><dd>road · rail · sea · air</dd></div>
+            <div><dt>EVENT SOURCE</dt><dd>carrier EDI + API (design targets)</dd></div>
+            <div><dt>STATUS</dt><dd>concept — no live freight</dd></div>
+          </dl>
+        </div>
+
+        <div class="hero__right">
+          <!-- Route map, inline SVG -->
+          <figure class="mapcard" id="network">
+            <figcaption class="mono">FIG. 1 — SAMPLE LANE: ROTTERDAM → CHICAGO (INTERMODAL)</figcaption>
+            <svg class="routemap" viewBox="0 0 640 360" role="img" aria-label="Stylized route map showing a sample intermodal journey from Rotterdam through the Atlantic and across North America to Chicago, with four waypoints">
+              <defs>
+                <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+                  <path d="M32 0H0V32" fill="none" stroke="#2a2e34" stroke-width="1"/>
+                </pattern>
+                <linearGradient id="routeGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#ff5c00"/><stop offset="1" stop-color="#ffb066"/>
+                </linearGradient>
+              </defs>
+              <rect width="640" height="360" fill="url(#grid)"/>
+              <!-- abstract landmass hints -->
+              <path d="M20 250 Q90 200 150 235 T260 225 L265 340 L15 345 Z" fill="#1b1e23" stroke="#2e333a" stroke-width="1.5"/>
+              <path d="M330 60 Q420 40 470 90 T560 120 L600 340 L340 335 Z" fill="#1b1e23" stroke="#2e333a" stroke-width="1.5"/>
+              <path d="M40 60 Q140 25 215 70 T300 95 L290 190 Q180 210 90 175 Z" fill="#1b1e23" stroke="#2e333a" stroke-width="1.5"/>
+              <!-- route -->
+              <path id="routePath" class="route" d="M88 128 C 190 60, 300 240, 372 196 S 520 130, 566 208" fill="none" stroke="url(#routeGrad)" stroke-width="3.5" stroke-dasharray="10 7"/>
+              <circle class="mover" r="6" fill="#ff5c00">
+                <animateMotion dur="9s" repeatCount="indefinite" rotate="auto">
+                  <mpath href="#routePath"/>
+                </animateMotion>
+              </circle>
+              <!-- waypoints -->
+              <g class="wp"><circle cx="88" cy="128" r="7"/><text x="88" y="105" text-anchor="middle">RTM · ROTTERDAM</text><text class="wp-t" x="88" y="152" text-anchor="middle">POL 03-14</text></g>
+              <g class="wp"><circle cx="236" cy="136" r="7"/><text x="236" y="113" text-anchor="middle">ATL-W · WAYPOINT</text><text class="wp-t" x="236" y="160" text-anchor="middle">ETA 03-24</text></g>
+              <g class="wp"><circle cx="372" cy="196" r="7"/><text x="372" y="220" text-anchor="middle">NYC-P · PORT NEWARK</text><text class="wp-t" x="372" y="173" text-anchor="middle">POD 03-26</text></g>
+              <g class="wp wp--end"><circle cx="566" cy="208" r="8"/><text x="566" y="232" text-anchor="middle">CHI · CHICAGO YARD</text><text class="wp-t" x="566" y="185" text-anchor="middle">FINAL 03-29</text></g>
+              <!-- compass + scale ticks -->
+              <g class="compass" transform="translate(600,52)"><circle r="18" fill="none" stroke="#3a4048"/><path d="M0,-13 L4,7 L0,3 L-4,7 Z" fill="#ff5c00"/><text y="-24" text-anchor="middle">N</text></g>
+            </svg>
+            <p class="mapcard__note mono">ALL LOCATIONS/TIMES ILLUSTRATIVE — NOT A LIVE TRACKING FEED</p>
+          </figure>
+        </div>
+      </div>
+      <div class="hero__strip" aria-hidden="true">
+        <span>SPEC</span><span>·</span><span>VISIBILITY</span><span>·</span><span>EXCEPTIONS</span><span>·</span><span>LEAD TIME</span><span>·</span><span>CHAIN OF CUSTODY</span><span>·</span><span>SPEC</span><span>·</span><span>VISIBILITY</span><span>·</span><span>EXCEPTIONS</span><span>·</span><span>LEAD TIME</span><span>·</span><span>CHAIN OF CUSTODY</span><span>·</span>
+      </div>
+    </section>
+
+    <!-- ======== TRACKER MOCK ======== -->
+    <section class="band band--dark" id="tracker">
+      <div class="shell">
+        <header class="head reveal">
+          <p class="head__no mono">SECTION 02</p>
+          <h2>THE TIMELINE, DRAWN LIKE A DRAWING.</h2>
+          <p class="head__lede">One consignment, four legs, every event with a source and a timestamp. Shipment <span class="mono hl">TRL-2024-0000-SAMPLE</span> is invented; the event grammar is what a dispatcher actually needs.</p>
+        </header>
+
+        <div class="tracker reveal" role="group" aria-label="Sample shipment timeline tracker">
+          <div class="tracker__rail" aria-hidden="true"><span class="tracker__pulse"></span></div>
+          <ol class="events">
+            <li class="event is-done">
+              <span class="event__node" aria-hidden="true"></span>
+              <div class="event__card">
+                <p class="event__meta mono"><span class="tag tag--sea">SEA</span> 03-14 08:02 UTC · RTM</p>
+                <h3>Container gated in · Bollé crate TN-4482 (vessel “MV Sample”)</h3>
+                <p>Bill of lading <span class="mono">SSL-990-SAMPLE</span> matched to PO. Seal number recorded at gate, photo attached.</p>
+                <p class="event__src mono">SOURCE: PORT EDI CODE: COARR — SAMPLE</p>
+              </div>
+            </li>
+            <li class="event is-done">
+              <span class="event__node" aria-hidden="true"></span>
+              <div class="event__card">
+                <p class="event__meta mono"><span class="tag tag--sea">SEA</span> 03-14 19:40 UTC · RTM</p>
+                <h3>Vessel departed load port</h3>
+                <p>On-terminal, 6 hours inside the booking window. Downstream ETA at Newark recalculated and pushed to all parties.</p>
+                <p class="event__src mono">SOURCE: CARRIER FEED — SAMPLE</p>
+              </div>
+            </li>
+            <li class="event is-now">
+              <span class="event__node" aria-hidden="true"></span>
+              <div class="event__card event__card--hot">
+                <p class="event__meta mono"><span class="tag tag--exception">EXCEPTION</span> 03-22 03:15 UTC · ATL-W</p>
+                <h3>Weather routing — heading adjusted, +36h projected</h3>
+                <p>Automatic exception raised: every downstream commitment re-dated, customer notification drafted, dispatcher approval pending. This state is the design's reason to exist.</p>
+                <p class="event__src mono">SOURCE: AIS POSITION Δ — SAMPLE</p>
+              </div>
+            </li>
+            <li class="event">
+              <span class="event__node" aria-hidden="true"></span>
+              <div class="event__card">
+                <p class="event__meta mono"><span class="tag tag--port">PORT</span> ETA 03-26 · NYC-P</p>
+                <h3>Discharge + customs hold plan</h3>
+                <p>Pre-filed entry means the container routes straight to rail transfer unless exam flags. Both branches pre-drawn.</p>
+                <p class="event__src mono">FUTURE — PLANNING ONLY</p>
+              </div>
+            </li>
+            <li class="event">
+              <span class="event__node" aria-hidden="true"></span>
+              <div class="event__card">
+                <p class="event__meta mono"><span class="tag tag--rail">RAIL</span>→<span class="tag tag--road">ROAD</span> FINAL 03-29 · CHI</p>
+                <h3>Rail to yard, last-mile to door</h3>
+                <p>Drayage partner auto-matched at 90h before POD. Delivery window is the carrier's, not a guess.</p>
+                <p class="event__src mono">FUTURE — PLANNING ONLY</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== CAPABILITIES ======== -->
+    <section class="band" id="capabilities">
+      <div class="shell">
+        <header class="head head--split reveal">
+          <div><p class="head__no mono">SECTION 03</p><h2>CAPABILITY, NOT ADJECTIVES.</h2></div>
+          <p class="head__lede">Each block states what the concept does in one sentence a procurement officer could repeat. Nothing here claims a customer.</p>
+        </header>
+        <div class="caps">
+          <article class="cap reveal">
+            <p class="cap__id mono">C-01</p>
+            <h3>Event fusion</h3>
+            <p>Carrier EDI, API pings, and AIS position deltas collapse into one deduplicated timeline. If two sources disagree, the timeline shows both — it never silently picks.</p>
+          </article>
+          <article class="cap reveal">
+            <p class="cap__id mono">C-02</p>
+            <h3>Exceptions with owners</h3>
+            <p>Every exception opens as a task with a named desk and a clock. Silence is the bug; the design nags until someone marks it seen.</p>
+          </article>
+          <article class="cap reveal">
+            <p class="cap__id mono">C-03</p>
+            <h3>Commitment re-dating</h3>
+            <p>When a leg slips, every promise downstream of it is recalculated and stamped with what changed and why — visible in the audit rail, not buried in email.</p>
+          </article>
+          <article class="cap reveal">
+            <p class="cap__id mono">C-04</p>
+            <h3>Party-scoped views</h3>
+            <p>Shipper, carrier, and consignee see the same truth through different windows. A customer link shows status, not your margin.</p>
+          </article>
+          <article class="cap reveal">
+            <p class="cap__id mono">C-05</p>
+            <h3>Boring exports</h3>
+            <p>Any view leaves as CSV or signed PDF with the raw event payloads attached. Reporting that can be cross-checked against source is reporting people trust.</p>
+          </article>
+          <article class="cap reveal">
+            <p class="cap__id mono">C-06</p>
+            <h3>Docker-scale docs</h3>
+            <p>The concept's developer surface is spec-first: an OpenAPI sketch, webhook samples, and a status-code glossary readable without a sales call.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== SPEC SHEET ======== -->
+    <section class="band band--wire" id="specs">
+      <div class="shell">
+        <header class="head reveal">
+          <p class="head__no mono">SECTION 04</p>
+          <h2>SPEC SHEET</h2>
+          <p class="head__lede">Design targets for the concept, listed the way machined parts are — with tolerances and a date.</p>
+        </header>
+        <div class="sheet reveal">
+          <div class="sheet__row sheet__row--head mono"><span>PARAMETER</span><span>SPECIFIED VALUE</span><span>NOTES</span></div>
+          <div class="sheet__row"><span>Event ingest latency (p95)</span><span class="mono hl">≤ 4 s</span><span>carrier feed → timeline render, design target</span></div>
+          <div class="sheet__row"><span>Duplicate-event suppression</span><span class="mono hl">2 sources, 1 row</span><span>conflicts surface, they don't vanish</span></div>
+          <div class="sheet__row"><span>Exception acknowledgement SLA</span><span class="mono hl">30 min, on-shift</span><span>escalates to second desk at +30</span></div>
+          <div class="sheet__row"><span>ETA recalculation window</span><span class="mono hl">± 6 h @ 30-day</span><span>planned tolerance for the demo model</span></div>
+          <div class="sheet__row"><span>Audit retention</span><span class="mono hl">7 years, append-only</span><span>every re-date keeps its receipt</span></div>
+          <div class="sheet__row"><span>Customer link expiry</span><span class="mono hl">delivery + 7 days</span><span>revocable per shipment</span></div>
+          <div class="sheet__row"><span>Modes modeled</span><span class="mono hl">road / rail / sea / air</span><span>intermodal chaining in FIG. 1</span></div>
+          <div class="sheet__row"><span>Data class</span><span class="mono hl">SYNTHETIC</span><span>no real consignments exist here</span></div>
+          <div class="sheet__row sheet__row--stamp"><span>DRAWING NO. TRL-C-004</span><span>REV A</span><span class="mono">SHEET 1 OF 1 · CONCEPT</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== PRICING ======== -->
+    <section class="band" id="pricing">
+      <div class="shell">
+        <header class="head reveal">
+          <p class="head__no mono">SECTION 05</p>
+          <h2>RATE CARD, HYPOTHETICAL.</h2>
+          <p class="head__lede">Pricing sketched for realism of scale, not for sale. No tier pretends to have customers.</p>
+        </header>
+        <div class="rates reveal">
+          <article class="rate">
+            <h3>SPOT</h3>
+            <p class="rate__price mono">$0<span>.00 /mo — evaluation tier</span></p>
+            <ul class="mono rate__list">
+              <li>25 active shipments</li><li>Full event timeline</li><li>1 webhook endpoint</li><li>CSV export</li>
+            </ul>
+            <a href="#faq" class="btn btn--wire btn--wide">What's the catch?</a>
+          </article>
+          <article class="rate rate--hot">
+            <p class="rate__flag mono">DESIGN CENTER OF GRAVITY</p>
+            <h3>LANE</h3>
+            <p class="rate__price mono">$0.35<span>/shipment on top of Spot math</span></p>
+            <ul class="mono rate__list">
+              <li>Unlimited active shipments</li><li>Exception desks + escalation clocks</li><li>Party-scoped customer links</li><li>Commitment re-dating audit rail</li>
+            </ul>
+            <a href="#faq" class="btn btn--orange btn--wide">Questions → FAQ</a>
+          </article>
+          <article class="rate">
+            <h3>FLEET</h3>
+            <p class="rate__price mono">N/A<span>— priced per contract, not per page</span></p>
+            <ul class="mono rate__list">
+              <li>Private event connectors</li><li>Retention &gt; 7y configurations</li><li>SSO + per-desk permissions</li><li>On-prem reporting mirror (sketch)</li>
+            </ul>
+            <a href="#faq" class="btn btn--wire btn--wide">Reality check</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== FAQ ======== -->
+    <section class="band band--dark" id="faq">
+      <div class="shell shell--narrow">
+        <header class="head reveal">
+          <p class="head__no mono">SECTION 06</p>
+          <h2>FREQUENTLY IMPOSED QUESTIONS</h2>
+        </header>
+        <div class="qa reveal">
+          <details>
+            <summary>Do you actually track freight?</summary>
+            <div class="qa__a"><p>We track design decisions. TrackLane is a studio concept build — the vessel “MV Sample”, the container, the lane, and the exception are all invented. The point of the piece is the information design: what a visibility product should put in front of a dispatcher, and in what order.</p></div>
+          </details>
+          <details>
+            <summary>Why does the spec sheet use engineering-drawing formatting?</summary>
+            <div class="qa__a"><p>Because logistics software earns trust the same way freight equipment does: stated tolerances, revision numbers, and dated drawings. Listing "≤ 4s p95, design target" is more honest than a logo wall of carriers you haven't integrated with.</p></div>
+          </details>
+          <details>
+            <summary>What's the orange dot on the map doing?</summary>
+            <div class="qa__a"><p>It's following the dashed route along a 9-second loop with SVG motion paths — no JavaScript. It exists to make the static page feel operational for a moment, and to stop for people who set reduced motion.</p></div>
+          </details>
+          <details>
+            <summary>Is the exception event real?</summary>
+            <div class="qa__a"><p>Weather routing around an Atlantic waypoint in late March is a plausible scenario; this specific one is scripted. Real exception design is what's being demonstrated: re-dated commitments, an approval queue, and a notification draft a human confirms.</p></div>
+          </details>
+          <details>
+            <summary>Could this be built for real?</summary>
+            <div class="qa__a"><p>That's the test we held ourselves to. Every screen here maps to data a mid-size 3PL could realistically assemble from carrier EDI 214/247 transactions, ocean carrier APIs, and AIS feeds. The hard parts — dedup, conflict surfacing, re-dating lineage — are named in the spec sheet rather than waved away.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== CTA ======== -->
+    <section class="dispatch">
+      <div class="shell dispatch__inner reveal">
+        <h2>DISPATCH POINT ZERO</h2>
+        <p>A visibility product is a timeline with a conscience. This is what one looks like before it has a single customer to please.</p>
+        <div class="dispatch__actions">
+          <a class="btn btn--orange btn--big" href="#tracker">Review the sample shipment</a>
+          <a class="btn btn--wire btn--big" href="https://github.com/siddharth446/tracklane-logistics-site" rel="noopener">Read the source</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="shell foot__grid">
+      <div>
+        <a href="#" class="mark" aria-label="TrackLane home"><svg width="24" height="24" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 20h20M6 20V8l7-4 7 4v12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="13" cy="12" r="2.6" fill="#ff5c00"/></svg><span>TRACKLANE</span></a>
+        <p class="foot__blurb">Concept shipment-visibility platform. All freight data synthetic. Built as a design study.</p>
+      </div>
+      <nav aria-label="Product"><h4>SYSTEM</h4><a href="#network">Route model</a><a href="#tracker">Timeline</a><a href="#specs">Spec sheet</a><a href="#pricing">Rate card</a></nav>
+      <nav aria-label="Reference"><h4>REFERENCE</h4><a href="#capabilities">Capabilities</a><a href="#faq">FAQ</a></nav>
+      <nav aria-label="Studio"><h4>STUDIO</h4><a href="https://nexapulsestudio.netlify.app" rel="noopener">NexaPulse Studio</a><a href="https://github.com/siddharth446/tracklane-logistics-site" rel="noopener">Source on GitHub</a></nav>
+    </div>
+    <div class="shell foot__legal">
+      <p>A studio concept build by <a href="https://nexapulsestudio.netlify.app" rel="noopener">NexaPulse Studio</a> — not a live client project. <a href="https://github.com/siddharth446/tracklane-logistics-site" rel="noopener">View source on GitHub.</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
